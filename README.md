@@ -17,6 +17,7 @@ cem_peec/
 ├── comparison/              # Comparative Analysis & Validation
 └── presentation.pdf         # Documentation & Presentations
 ```
+I recommend starting with the `presentation.pdf` file to better understand the different scripts.
 
 ### Core Components
 
@@ -71,7 +72,7 @@ comparison/
 - **method2/**  
   Contains MATLAB codes implementing Method 2, based on the energy storage approach detailed in [2] and [3]. 
   - **single_conductor/**  
-    Contains scripts for single-conductor analysis under terminal voltage stimulation. It constructs the partial inductance and resistance matrices using energy-based formulations, computes filament currents, and evaluates total losses against reference data. The inductance calculations are validated against analytical solutions [3].
+    Contains the script `SingleConductor_InductanceComparison.m` and the reference data file `SingleConductor_ReferenceLosses.xlsx`. This folder focuses on single-conductor simulations under terminal voltage stimulation. It constructs the partial inductance and resistance matrices, computes the filament currents, and evaluates the total losses, which are then compared against reference data.
   
   - **multi_conductor/**  
     Extends the energy storage approach to multi-conductor configurations. The implementation handles conductor interactions and proximity effects through mutual inductance calculations. Results are validated against external reference data.
@@ -80,48 +81,12 @@ comparison/
   Contains validation scripts comparing both methods under different conditions. The analysis includes a systematic study of both methods' performance across:
   - Different mesh densities to evaluate convergence properties
   - A wide frequency range (from quasi DC to high frequencies) to assess the methods' ability to capture skin and proximity effects
-  <!--
-  - Various conductor configurations to test robustness and accuracy
-  -->
   
   - **Current Stimulation/** (`C_1C_Original_Dim_Current_Distribution_Fixed_Mesh/`)  
     Analyzes mesh convergence and accuracy under terminal current excitation. Multiple mesh configurations are tested to evaluate how the discretization affects the solution accuracy. The frequency sweep helps identify the operational limits of each method, particularly in capturing high-frequency phenomena like the skin effect.
     
   - **Voltage Stimulation/** (`V_1C_Original_Dim_Current_Distribution_Fixed_Mesh/`)  
-    Analyzes mesh convergence and accuracy under terminal voltage excitation.
-
-  In both the cases multiple mesh configurations are tested to evaluate how the discretization affects the solution accuracy. The frequency sweep helps identify the operational limits of each method, particularly in capturing high-frequency phenomena like the skin effect. Both test cases include comprehensive result visualization and error analysis, stored in their respective `Images_Method1_and_Method2/` directories.
-
-- **docs/**  Update also this. I moved the presentation out.
-  Contains detailed documentation of mathematical formulations, implementation details, and validation results. Includes presentations and technical notes explaining both methods.
-
-
-- **method1/**  
-  Contains MATLAB codes implementing Method 1, based on the Green’s Function Approach as described in [1].  
-  - **CircularConductor/**  
-    Includes scripts (e.g., `generateCircularConductorMesh.m`, `SingleConductorCircularShape.m`) for simulating circular conductor geometries. The function `generateCircularConductorMesh` uses a cosine-based, non-uniform meshing approach to discretize the circular cross-section into rectangular sub-elements. This yields a finer mesh near the curved boundary and a coarser one near the center, ensuring an accurate representation of the conductor's geometry. The mesh data (element centers, areas, and vertices) are used to compute the current distribution under a specified terminal current, and the total losses are compared with COMSOL reference data.
-  
-  - **RectangularConductor/**  
-    Contains scripts (e.g., `generateNonUniformMesh.m`, `SingleConductor.m`, `TestConvergenceLosses.m`) for simulating rectangular conductor geometries. These scripts generate a non-uniform mesh over the conductor's cross-section using a sinusoidal distribution, which provides finer resolution near the edges and coarser resolution near the center. The resulting mesh is then used to calculate the resistance and inductance matrices (with mutual inductance computed via a Green’s function and self-inductance derived from the local geometry). The combined impedance matrix allows for the computation of filament currents under terminal excitation, and the total losses are evaluated against COMSOL reference data. Convergence tests confirm that results improve with mesh refinement.
-
-  - **COMSOL/**  
-    Contains COMSOL Multiphysics project files (e.g., `SingleConductor.mph`) used to generate reference solutions for losses.
-
-- **method2/**  
-  Contains MATLAB codes implementing Method 2, which is derived from the energy storage approach as detailed in [2] and [3].  
-  - **single_conductor/**  
-    Contains the script `SingleConductor_InductanceComparison.m` and the reference data file `SingleConductor_ReferenceLosses.xlsx`. This folder focuses on single-conductor simulations under terminal voltage stimulation. It constructs the partial inductance and resistance matrices, computes the filament currents, and evaluates the total losses, which are then compared against reference data.
-  
-  - **multi_conductor/**  
-    Contains the script `MultiConductor_UniformMesh.m`, which extends the energy storage approach to a configuration with three conductors under terminal current stimulation. This script evaluates whether the implementation reliably captures conductor interactions and proximity effects, with the computed losses compared against external reference data.
-
-
-- **comparison/**  
-  Contains MATLAB codes that compare the performance and accuracy of Method 1 and Method 2 under different terminal excitation modes and mesh densities. A detailed description of the exercise is available in the **docs** folder. Within this folder:
-  - **C_1C_Original_Dim_Current_Distribution_Fixed_Mesh/**  
-    Contains the script `TestConvergenceLosses_CURRENT.m`, which performs a mesh convergence analysis under terminal current stimulation. It compares computed losses against COMSOL reference data to verify that the current distribution is accurately modeled as the mesh density increases. This subfolder also includes an `Images_Method1_and_Method2/` directory where the generated plots are stored.
-  - **V_1C_Original_Dim_Current_Distribution_Fixed_Mesh/**  
-    Contains the script `TestConvergenceLosses_VOLTAGE.m`, which performs a mesh convergence analysis under terminal voltage stimulation. It compares computed losses against COMSOL reference data to confirm that the voltage-driven current distribution converges appropriately with finer meshes. This subfolder also includes an `Images_Method1_and_Method2/` directory where the generated plots are saved.
+    Analyzes mesh convergence and accuracy under terminal voltage excitation. Both test cases include comprehensive result visualization and error analysis, stored in their respective `Images_Method1_and_Method2/` directories.
 
 - **presentation.pdf**  
   Contains comprehensive documentation of the theoretical background and mathematical derivations of both methods.
