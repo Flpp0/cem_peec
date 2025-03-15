@@ -79,14 +79,18 @@ comparison/
 
 - **comparison/**  
   Contains validation scripts comparing both methods under different conditions. The analysis includes a systematic study of both methods' performance across:
-  - Different mesh densities to evaluate convergence properties
-  - A wide frequency range (from quasi DC to high frequencies) to assess the methods' ability to capture skin and proximity effects
+  - Different mesh densities to evaluate convergence properties.
+  - A wide frequency range (from quasi DC to high frequencies) to assess the methods' ability to capture skin and proximity effects.
+
+  The frequency sweep helps identify the operational limits of each method.
   
   - **Current Stimulation/** (`C_1C_Original_Dim_Current_Distribution_Fixed_Mesh/`)  
-    Analyzes mesh convergence and accuracy under terminal current excitation. Multiple mesh configurations are tested to evaluate how the discretization affects the solution accuracy. The frequency sweep helps identify the operational limits of each method, particularly in capturing high-frequency phenomena like the skin effect.
+    Analyzes mesh convergence and accuracy under terminal current excitation. Multiple mesh configurations are tested to evaluate how the discretization affects the solution accuracy.
     
   - **Voltage Stimulation/** (`V_1C_Original_Dim_Current_Distribution_Fixed_Mesh/`)  
-    Analyzes mesh convergence and accuracy under terminal voltage excitation. Both test cases include comprehensive result visualization and error analysis, stored in their respective `Images_Method1_and_Method2/` directories.
+    Analyzes mesh convergence and accuracy under terminal voltage excitation. Multiple mesh configurations are tested to evaluate how the discretization affects the solution accuracy.
+
+   Both test cases include comprehensive result visualization and error analysis, stored in their respective `Images_Method1_and_Method2/` directories.
 
 - **presentation.pdf**  
   Contains comprehensive documentation of the theoretical background and mathematical derivations of both methods.
